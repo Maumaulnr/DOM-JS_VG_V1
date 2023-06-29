@@ -1,0 +1,55 @@
+#board {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* définit le style d'une boite numérotée du jeu dans son état initial */
+.box {
+    width: 75px;
+    height: 75px;
+    border: 1px solid black;
+    background-color: rgb(212, 250, 76);
+    font-size: 3em;
+    text-align: center;
+    line-height: 75px;
+    margin: 5px;
+    animation: appear 1s;
+    border-radius: 6px;
+    /* Le passage d'une boite cliquable à une boite validée est un peu abrupt pour le joueur. De même que le pointeur de la souris ne change pas au survol d'une boite pour indiquer que celle-ci est cliquable */
+    cursor: pointer;
+    transition: background-color 0.8s, color 0.8s, transform 0.8s;  /* transition permettra d'animer le passage d'état de la classe "box" à "box-valid". 0.8 secondes seront consacrées au changement de la couleur de fond, de la couleur du texte et de la propriété transform qui réduira la taille de la boite de 20%. */
+}
+
+/* modifiera la couleur de fond et celle du texte lorsque cette boite sera cliquée ET valide */
+.box-clicked {
+    background-color: #ccc;
+    color: #aaa;
+    transform: scale(0.8);
+}
+
+.box.error {
+    color: rgb(144, 58, 58);
+    background-color: rgb(255, 160, 190);
+}
+
+.box.success {
+    color: rgb(11, 138, 22);
+    background-color: rgb(172, 251, 172);
+}
+
+.box.notice {
+    color: rgb(18, 16, 151);
+    background-color: rgb(184, 217, 255);
+    cursor: not-allowed;
+}
+
+/* "appear" permettra au chargement de la place de faire apparaître les boites en tournoyant et zoomant légèrement, donnant un retour visuel au joueur lui signifiant que le jeu commence avec des boites mélangées. */
+@keyframes appear {
+    from {
+        transform: scale(0) rotate(180deg);
+    }
+
+    to {
+        transform: scale(1) rotate(0deg);
+    }
+}
